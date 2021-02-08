@@ -11,9 +11,13 @@
 - [ ] text selection and copying to buffer
 - [ ] pasting from buffer history
 - [ ] multiple selections
+- [ ] loading previously save documents
+- [ ] text viewer
+- [ ] search in document
+- [ ] syntax highlighting
+- [ ] code completion
 
 # Non-functional requirements:
-
 - [ ] code organization
 - [ ] unit tests
 - [ ] e2e / integration tests
