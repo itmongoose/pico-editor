@@ -24,5 +24,4 @@ document.body.addEventListener('keydown', (e) => {
     if (e.key === 'Backspace') {
         el.innerText = el.innerText.slice(0, -1);
     }
-    // el.innerText += e.key;
 });
