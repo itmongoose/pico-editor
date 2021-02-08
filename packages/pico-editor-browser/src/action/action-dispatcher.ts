@@ -1,9 +1,16 @@
 import {ActionType} from "./types";
 
+export interface Position {
+    line: number;
+    column: number;
+}
+
 export interface ActionData {
     text?: string;
     start?: number;
     end?: number;
+    startPosition?: Position;
+    endPosition?: Position;
 }
 
 export interface Action {

@@ -8,21 +8,19 @@ export class DocumentController implements Controller {
 
     executeAction(action: Action): Promise<void> {
         switch (action.type) {
-            case "TypeCharacter":
-                if (action.data.text) {
-                    this.model.addCharacter(action.data.text);
-                    this.view.update();
+            case "InsertText":
+                if (!action.data.text || !action.data.startPosition) {
+                    break;
                 }
+                this.model.insertText(action.data.text, action.data.startPosition);
+                this.view.update();
                 break;
-            case "DeleteCharacter":
-                let start = 0, end = 0;
-                if (action.data.start) {
-                    start = action.data.start;
+            case "RemoveText":
+                console.log('remove text', action.data);
+                if (!action.data.startPosition || !action.data.endPosition) {
+                    break;
                 }
-                if (action.data.end) {
-                    end = action.data.end;
-                }
-                this.model.slice(start, end);
+                this.model.removeText(action.data.startPosition, action.data.endPosition);
                 this.view.update();
                 break;
         }

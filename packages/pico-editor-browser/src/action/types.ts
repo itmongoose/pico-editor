@@ -1,4 +1,6 @@
 export type ActionType =
     | 'TypeCharacter'
-    | 'DeleteCharacter'
+    | 'DeletePreviousCharacter'
+    | 'InsertText'
+    | 'RemoveText'
 ;

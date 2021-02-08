@@ -7,7 +7,8 @@ import {ActionDispatcher} from "./action/action-dispatcher";
 import {TypeCharacterAction} from "./action/type-character-action";
 import {DocumentController} from "./document/document-controller";
 import {DocumentModel} from "./document/document-model";
-import {DeleteCharacterAction} from "./action/delete-character-action";
+import {DeletePreviousCharacterAction} from "./action/delete-previous-character-action";
+import {CursorController} from "./cursor/cursor-controller";
 
 function blockElement() {
     return document.createElement('div');
@@ -24,18 +25,20 @@ editorEl.appendChild(documentEl);
 // models:
 const editorModel = new EditorModel();
 const documentModel = new DocumentModel();
-const cursorModel = new CursorModel();
+const cursorModel = new CursorModel(documentModel);
 
 // views:
 const editorView = new EditorView(editorModel, editorEl);
 const cursorView = new CursorView(cursorModel, cursorEl);
 const documentView = new DocumentView(documentModel, documentEl);
 
-// controllers:
-const documentController = new DocumentController(documentModel, documentView);
-
 // dispatcher:
 const dispatcher = new ActionDispatcher();
+
+// controllers:
+const cursorController = new CursorController(cursorModel, cursorView, dispatcher);
+const documentController = new DocumentController(documentModel, documentView);
+dispatcher.registerController(cursorController);
 dispatcher.registerController(documentController);
 
 document.body.addEventListener('keypress', (e) => {
@@ -52,7 +55,7 @@ document.body.addEventListener('keypress', (e) => {
 });
 document.body.addEventListener('keydown', (e) => {
     if (e.key === 'Backspace') {
-        const action = new DeleteCharacterAction(0, -1);
+        const action = new DeletePreviousCharacterAction();
         dispatcher.dispatch(action);
     }
 });

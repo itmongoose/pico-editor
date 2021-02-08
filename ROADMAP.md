@@ -2,8 +2,10 @@
 - [v] typing single characters in
 - [v] removing single characters with <Backspace>
 - [v] adding new lines with <Enter>
-- [ ] show cursor
+- [v] show cursor
 - [ ] move cursor around
+- [ ] tab inserts 4 spaces
+- [ ] backspace works across lines  
 - [ ] delete current line with a keyboard shortcut
 - [ ] multiple cursors
 - [ ] pasting content from buffer
@@ -20,6 +22,7 @@
 - [ ] code completion
 
 # Non-functional requirements:
+- [ ] code lint
 - [ ] code organization
 - [ ] unit tests
 - [ ] e2e / integration tests

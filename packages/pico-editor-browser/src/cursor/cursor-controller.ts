@@ -1,0 +1,37 @@
+import {CursorModel} from "./cursor-model";
+import {CursorView} from "./cursor-view";
+import {Action, ActionDispatcher, Controller} from "../action/action-dispatcher";
+import {InsertTextAction} from "../action/insert-text-action";
+import {RemoveTextAction} from "../action/remove-text-action";
+
+export class CursorController implements Controller {
+    constructor(private model: CursorModel, private view: CursorView, private dispatcher: ActionDispatcher) {
+    }
+
+    executeAction(action: Action): Promise<void> {
+        switch (action.type) {
+            case "TypeCharacter":
+                if (action.data.text) {
+                    this.dispatcher.dispatch(new InsertTextAction(action.data.text, this.model.getPosition()));
+                    if (action.data.text === '\n') {
+                        this.model.moveDown();
+                        this.model.moveToBeginningOfString();
+                    } else {
+                        this.model.moveRight();
+                    }
+                    this.view.update();
+                    break;
+                }
+                break;
+            case "DeletePreviousCharacter":
+                const endPosition = {...this.model.getPosition()};
+                this.model.moveLeft();
+                const startPosition = {...this.model.getPosition()};
+                this.dispatcher.dispatch(new RemoveTextAction(startPosition, endPosition));
+                this.view.update();
+                break;
+        }
+
+        return Promise.resolve();
+    }
+}
