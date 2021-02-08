@@ -1,0 +1,17 @@
+.blinker {
+    animation: blinker 1.5s step-end infinite;
+}
+.cursor {
+    border-left: 1px solid #363636;
+    height: 20px;
+    position: absolute;
+}
+
+@keyframes blinker {
+    from, to {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+}

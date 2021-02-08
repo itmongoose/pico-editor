@@ -9,10 +9,12 @@
 - [ ] pasting content from buffer
 - [ ] text selection and removing selected text
 - [ ] text selection and copying to buffer
+- [ ] select all keyboard shortcut  
 - [ ] pasting from buffer history
 - [ ] multiple selections
 - [ ] loading previously save documents
 - [ ] text viewer
+- [ ] text viewer following the cursor
 - [ ] search in document
 - [ ] syntax highlighting
 - [ ] code completion
