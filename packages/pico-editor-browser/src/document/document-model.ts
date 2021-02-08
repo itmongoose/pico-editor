@@ -3,12 +3,28 @@ import {Position} from "../action/action-dispatcher";
 export class DocumentModel {
     private lines: string[] = [];
 
-    public insertText(text: string, position: Position) {
-        if (!this.lines[position.line]) {
-            this.lines[position.line] = '';
+    public insertText(text: string, startPosition: Position) {
+        const linesToInsert = text.split('\n');
+
+        const endChunk = [];
+        for (let i = 0; i < linesToInsert.length; i +=1) {
+            const currentLine = startPosition.line + i;
+            const currentColumn = i === 0 ? startPosition.column : 0;
+            // add new line if needed:
+            if (!this.lines[currentLine]) {
+                this.lines[currentLine] = '';
+            }
+            const targetLine = this.lines[currentLine];
+
+            const lineChunk = linesToInsert[i];
+            this.lines[currentLine] = targetLine.substring(0, currentColumn) + lineChunk;
+            endChunk.push(targetLine.substring(currentColumn));
+
+            // add the rest of the first string to the end:
+            if (i === linesToInsert.length - 1) {
+                this.lines[currentLine] += endChunk.join('');
+            }
         }
-        const targetLine = this.lines[position.line];
-        this.lines[position.line] = targetLine.substring(0, position.column) + text + targetLine.substring(position.column);
     }
 
     public removeText(start: Position, end: Position) {

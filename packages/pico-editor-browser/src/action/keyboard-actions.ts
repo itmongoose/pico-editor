@@ -25,3 +25,9 @@ export class MoveDownAction implements Action {
         return {};
     }
 }
+export class EnterAction implements Action {
+    readonly type: ActionType = 'Enter';
+    get data(): ActionData {
+        return {};
+    }
+}

@@ -13,12 +13,7 @@ export class CursorController implements Controller {
             case "TypeCharacter":
                 if (action.data.text) {
                     this.dispatcher.dispatch(new InsertTextAction(action.data.text, this.model.getPosition()));
-                    if (action.data.text === '\n') {
-                        this.model.moveDown(true);
-                        this.model.moveToBeginningOfString();
-                    } else {
-                        this.model.moveRight();
-                    }
+                    this.model.moveRight();
                     this.view.update();
                     break;
                 }
@@ -44,6 +39,12 @@ export class CursorController implements Controller {
                 break;
             case "MoveDown":
                 this.model.moveDown();
+                this.view.update();
+                break;
+            case "Enter":
+                this.dispatcher.dispatch(new InsertTextAction('\n', this.model.getPosition()));
+                this.model.moveDown(true);
+                this.model.moveToBeginningOfString();
                 this.view.update();
                 break;
         }

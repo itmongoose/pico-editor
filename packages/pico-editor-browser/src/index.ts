@@ -9,7 +9,7 @@ import {DocumentController} from "./document/document-controller";
 import {DocumentModel} from "./document/document-model";
 import {DeletePreviousCharacterAction} from "./action/delete-previous-character-action";
 import {CursorController} from "./cursor/cursor-controller";
-import {MoveDownAction, MoveLeftAction, MoveRightAction, MoveUpAction} from "./action/keyboard-actions";
+import {EnterAction, MoveDownAction, MoveLeftAction, MoveRightAction, MoveUpAction} from "./action/keyboard-actions";
 
 function blockElement() {
     return document.createElement('div');
@@ -47,7 +47,7 @@ document.body.addEventListener('keypress', (e) => {
     let action;
     switch (e.key) {
         case 'Enter':
-            action = new TypeCharacterAction('\n');
+            action = new EnterAction();
             break;
         default:
             action = new TypeCharacterAction(e.key);

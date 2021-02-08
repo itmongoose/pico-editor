@@ -7,4 +7,5 @@ export type ActionType =
     | 'MoveRight'
     | 'MoveUp'
     | 'MoveDown'
+    | 'Enter'
 ;
