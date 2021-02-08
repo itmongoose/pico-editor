@@ -3,4 +3,8 @@ export type ActionType =
     | 'DeletePreviousCharacter'
     | 'InsertText'
     | 'RemoveText'
+    | 'MoveLeft'
+    | 'MoveRight'
+    | 'MoveUp'
+    | 'MoveDown'
 ;

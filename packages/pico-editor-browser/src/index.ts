@@ -9,6 +9,7 @@ import {DocumentController} from "./document/document-controller";
 import {DocumentModel} from "./document/document-model";
 import {DeletePreviousCharacterAction} from "./action/delete-previous-character-action";
 import {CursorController} from "./cursor/cursor-controller";
+import {MoveDownAction, MoveLeftAction, MoveRightAction, MoveUpAction} from "./action/keyboard-actions";
 
 function blockElement() {
     return document.createElement('div');
@@ -54,8 +55,25 @@ document.body.addEventListener('keypress', (e) => {
     dispatcher.dispatch(action);
 });
 document.body.addEventListener('keydown', (e) => {
+    console.log("keydown", e.key, e.code);
     if (e.key === 'Backspace') {
         const action = new DeletePreviousCharacterAction();
+        dispatcher.dispatch(action);
+    }
+    if (e.key === 'ArrowLeft') {
+        const action = new MoveLeftAction();
+        dispatcher.dispatch(action);
+    }
+    if (e.key === 'ArrowRight') {
+        const action = new MoveRightAction();
+        dispatcher.dispatch(action);
+    }
+    if (e.key === 'ArrowUp') {
+        const action = new MoveUpAction();
+        dispatcher.dispatch(action);
+    }
+    if (e.key === 'ArrowDown') {
+        const action = new MoveDownAction();
         dispatcher.dispatch(action);
     }
 });

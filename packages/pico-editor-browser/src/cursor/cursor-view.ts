@@ -13,7 +13,7 @@ export class CursorView {
 
     public update() {
         const position = this.model.getPosition();
-        this.el.style.left = `${position.column * this.characterWidthPx + 1}px`;
+        this.el.style.left = `${position.column * this.characterWidthPx + 0.5}px`;
         this.el.style.top = `${position.line * this.lineHeightPx}px`;
     }
 }

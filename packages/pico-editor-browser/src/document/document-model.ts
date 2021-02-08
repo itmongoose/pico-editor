@@ -36,6 +36,10 @@ export class DocumentModel {
         return this.lines;
     }
 
+    public getLinesCount(): number {
+        return this.lines.length;
+    }
+
     public getLine(index:number): string | undefined {
         return this.lines[index];
     }

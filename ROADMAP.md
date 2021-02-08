@@ -3,7 +3,10 @@
 - [v] removing single characters with <Backspace>
 - [v] adding new lines with <Enter>
 - [v] show cursor
-- [ ] move cursor around
+- [v] move cursor around (single character cursor move with arrows)
+- [ ] enter new line correctly on <enter> (do not type \n, but create a new line instead)
+- [ ] moving up/down to shorter lines moves cursor to end of string and remembers original column position for a longer line  
+- [ ] cmd+left/right brings cursor to the beginning/end of line   
 - [ ] tab inserts 4 spaces
 - [ ] backspace works across lines  
 - [ ] delete current line with a keyboard shortcut

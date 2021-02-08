@@ -14,7 +14,7 @@ export class CursorController implements Controller {
                 if (action.data.text) {
                     this.dispatcher.dispatch(new InsertTextAction(action.data.text, this.model.getPosition()));
                     if (action.data.text === '\n') {
-                        this.model.moveDown();
+                        this.model.moveDown(true);
                         this.model.moveToBeginningOfString();
                     } else {
                         this.model.moveRight();
@@ -28,6 +28,22 @@ export class CursorController implements Controller {
                 this.model.moveLeft();
                 const startPosition = {...this.model.getPosition()};
                 this.dispatcher.dispatch(new RemoveTextAction(startPosition, endPosition));
+                this.view.update();
+                break;
+            case "MoveLeft":
+                this.model.moveLeft();
+                this.view.update();
+                break;
+            case "MoveRight":
+                this.model.moveRight();
+                this.view.update();
+                break;
+            case "MoveUp":
+                this.model.moveUp();
+                this.view.update();
+                break;
+            case "MoveDown":
+                this.model.moveDown();
                 this.view.update();
                 break;
         }
