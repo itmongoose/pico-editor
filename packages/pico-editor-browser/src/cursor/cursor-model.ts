@@ -3,6 +3,7 @@ import {DocumentModel} from "../document/document-model";
 
 export class CursorModel {
     private position: Position;
+    private maxColumnPosition: number | undefined = undefined;
 
     constructor(private document: DocumentModel) {
         this.position = {line: 0, column: 0};
@@ -17,12 +18,14 @@ export class CursorModel {
         if (this.position.column < 0) {
             this.position.column = 0;
         }
+        this.resetCorrectedColumnPosition();
     }
     public moveUp() {
         this.position.line -= 1;
         if (this.position.line < 0) {
             this.position.line = 0;
         }
+        this.correctColumnPosition();
     }
     public moveRight() {
         const currentLine = this.document.getLine(this.position.line);
@@ -32,6 +35,7 @@ export class CursorModel {
         if (this.position.column < currentLine.length) {
             this.position.column += 1;
         }
+        this.resetCorrectedColumnPosition();
     }
     public moveDown(forceNewLine = false) {
         const linesCount = this.document.getLinesCount();
@@ -40,9 +44,30 @@ export class CursorModel {
         } else if (forceNewLine && this.position.line === linesCount - 1) {
             this.position.line += 1;
         }
+        this.correctColumnPosition();
     }
 
     moveToBeginningOfString() {
         this.position.column = 0;
+    }
+
+    private resetCorrectedColumnPosition() {
+        this.maxColumnPosition = undefined;
+    }
+
+    private correctColumnPosition() {
+        const currentLine = this.document.getLine(this.position.line);
+        if (!currentLine) {
+            return;
+        }
+        const currentLineLength = currentLine.length;
+        if (currentLineLength <= this.position.column) {
+            if (this.maxColumnPosition === undefined) {
+                this.maxColumnPosition = this.position.column;
+            }
+            this.position.column = currentLineLength;
+        } else if (this.maxColumnPosition !== undefined) {
+            this.position.column = Math.min(this.maxColumnPosition, currentLineLength);
+        }
     }
 }
