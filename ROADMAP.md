@@ -8,7 +8,8 @@
 - [v] moving up/down to shorter lines moves cursor to end of string and remembers original column position for a longer line
 - [v] moving up/down when in the first/last line moves cursor to the beginning/end of string
 - [v] cmd+left/right brings cursor to the beginning/end of line
-- [ ] tab inserts 4 spaces
+- [v] tab inserts 4 spaces, shift-tab removes 4 spaces from the beginning of the line
+- [ ] enter creates a new line with the same amount of white space as in the beginning of the previous line
 - [ ] backspace works across lines (backspace in the beginning of the line merges previous line with current line)
 - [ ] delete current line with a keyboard shortcut
 - [ ] duplicate current line with a keyboard shortcut

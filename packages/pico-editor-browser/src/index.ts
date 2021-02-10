@@ -11,7 +11,7 @@ import {DeletePreviousCharacterAction} from "./action/delete-previous-character-
 import {CursorController} from "./cursor/cursor-controller";
 import {
     EnterAction, MoveCmdLeftAction, MoveCmdRightAction, MoveDownAction, MoveLeftAction, MoveRightAction,
-    MoveUpAction
+    MoveUpAction, ShiftTabAction, TabAction
 } from "./action/keyboard-actions";
 
 function blockElement() {
@@ -89,6 +89,14 @@ document.body.addEventListener('keydown', (e) => {
     }
     if (e.key === 'ArrowDown') {
         const action = new MoveDownAction();
+        dispatcher.dispatch(action);
+    }
+    if (e.key === 'Tab') {
+        e.preventDefault();
+        let action = new TabAction();
+        if (e.shiftKey) {
+            action = new ShiftTabAction();
+        }
         dispatcher.dispatch(action);
     }
 });

@@ -11,6 +11,8 @@ export interface ActionData {
     end?: number;
     startPosition?: Position;
     endPosition?: Position;
+    lineNumber?: number;
+    maxLength?: number;
 }
 
 export interface Action {

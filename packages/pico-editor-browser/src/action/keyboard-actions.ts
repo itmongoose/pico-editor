@@ -43,3 +43,15 @@ export class MoveCmdRightAction implements Action {
         return {};
     }
 }
+export class TabAction implements Action {
+    readonly type: ActionType = 'Tab';
+    get data(): ActionData {
+        return {};
+    }
+}
+export class ShiftTabAction implements Action {
+    readonly type: ActionType = 'ShiftTab';
+    get data(): ActionData {
+        return {};
+    }
+}

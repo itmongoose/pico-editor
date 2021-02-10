@@ -3,6 +3,7 @@ export type ActionType =
     | 'DeletePreviousCharacter'
     | 'InsertText'
     | 'RemoveText'
+    | 'LeftTrimLine'
     | 'MoveLeft'
     | 'MoveRight'
     | 'MoveUp'
@@ -10,4 +11,6 @@ export type ActionType =
     | 'Enter'
     | 'MoveCmdLeft'
     | 'MoveCmdRight'
+    | 'Tab'
+    | 'ShiftTab'
 ;

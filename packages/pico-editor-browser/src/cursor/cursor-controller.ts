@@ -3,6 +3,7 @@ import {CursorView} from "./cursor-view";
 import {Action, ActionDispatcher, Controller} from "../action/action-dispatcher";
 import {InsertTextAction} from "../action/insert-text-action";
 import {RemoveTextAction} from "../action/remove-text-action";
+import {LeftTrimLineAction} from "../action/trim-line-action";
 
 export class CursorController implements Controller {
     constructor(private model: CursorModel, private view: CursorView, private dispatcher: ActionDispatcher) {
@@ -53,6 +54,22 @@ export class CursorController implements Controller {
                 this.dispatcher.dispatch(new InsertTextAction('\n', this.model.getPosition()));
                 this.model.moveDown(true);
                 this.model.moveToBeginningOfLine();
+                this.view.update();
+                break;
+            case "Tab":
+                const tab = '    '; // four spaces
+                this.dispatcher.dispatch(new InsertTextAction('    ', this.model.getPosition()));
+                for (let i = 0; i < tab.length; i+=1) {
+                    this.model.moveRight();
+                }
+                this.view.update();
+                break;
+            case "ShiftTab":
+                const spacesToRemove = 4;
+                this.dispatcher.dispatch(new LeftTrimLineAction(this.model.getPosition().line, spacesToRemove));
+                for (let i = 0; i < spacesToRemove; i+=1) {
+                    this.model.moveLeft();
+                }
                 this.view.update();
                 break;
         }

@@ -16,11 +16,25 @@ export class DocumentController implements Controller {
                 this.view.update();
                 break;
             case "RemoveText":
-                console.log('remove text', action.data);
                 if (!action.data.startPosition || !action.data.endPosition) {
                     break;
                 }
                 this.model.removeText(action.data.startPosition, action.data.endPosition);
+                this.view.update();
+                break;
+            case "LeftTrimLine":
+                if (action.data.lineNumber === undefined || action.data.maxLength === undefined) {
+                    break;
+                }
+                const line = this.model.getLine(action.data.lineNumber);
+                if (!line) {
+                    break;
+                }
+                for (let i = 0; i < action.data.maxLength; i+=1) {
+                    if (line[i] && line[i].match(/\s/)) {
+                        this.model.removeText({column: 0, line: action.data.lineNumber}, {column: 1, line: action.data.lineNumber});
+                    }
+                }
                 this.view.update();
                 break;
         }
