@@ -29,8 +29,16 @@ export class CursorController implements Controller {
                 this.model.moveLeft();
                 this.view.update();
                 break;
+            case "MoveCmdLeft":
+                this.model.moveToBeginningOfLine();
+                this.view.update();
+                break;
             case "MoveRight":
                 this.model.moveRight();
+                this.view.update();
+                break;
+            case "MoveCmdRight":
+                this.model.moveToEndOfLine();
                 this.view.update();
                 break;
             case "MoveUp":
@@ -44,7 +52,7 @@ export class CursorController implements Controller {
             case "Enter":
                 this.dispatcher.dispatch(new InsertTextAction('\n', this.model.getPosition()));
                 this.model.moveDown(true);
-                this.model.moveToBeginningOfString();
+                this.model.moveToBeginningOfLine();
                 this.view.update();
                 break;
         }

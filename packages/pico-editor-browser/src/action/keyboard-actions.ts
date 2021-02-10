@@ -31,3 +31,15 @@ export class EnterAction implements Action {
         return {};
     }
 }
+export class MoveCmdLeftAction implements Action {
+    readonly type: ActionType = 'MoveCmdLeft';
+    get data(): ActionData {
+        return {};
+    }
+}
+export class MoveCmdRightAction implements Action {
+    readonly type: ActionType = 'MoveCmdRight';
+    get data(): ActionData {
+        return {};
+    }
+}

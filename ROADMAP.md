@@ -7,12 +7,16 @@
 - [v] enter new line correctly on <enter> (do not type \n, but create a new line instead)
 - [v] moving up/down to shorter lines moves cursor to end of string and remembers original column position for a longer line
 - [v] moving up/down when in the first/last line moves cursor to the beginning/end of string
-- [ ] cmd+left/right brings cursor to the beginning/end of line   
+- [v] cmd+left/right brings cursor to the beginning/end of line
 - [ ] tab inserts 4 spaces
 - [ ] backspace works across lines (backspace in the beginning of the line merges previous line with current line)
 - [ ] delete current line with a keyboard shortcut
-- [ ] multiple cursors
+- [ ] duplicate current line with a keyboard shortcut
+- [ ] multiple cursors: typing characters in multiple positions simultaneously
+- [ ] multiple cursors: removing characters with backspace from multiple positions simultaneously
 - [ ] pasting content from buffer
+- [ ] selecting text with a keyboard (shift + arrows)
+- [ ] selecting text with a mouse
 - [ ] text selection and removing selected text
 - [ ] text selection and copying to buffer
 - [ ] select all keyboard shortcut  

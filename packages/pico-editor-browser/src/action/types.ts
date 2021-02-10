@@ -8,4 +8,6 @@ export type ActionType =
     | 'MoveUp'
     | 'MoveDown'
     | 'Enter'
+    | 'MoveCmdLeft'
+    | 'MoveCmdRight'
 ;

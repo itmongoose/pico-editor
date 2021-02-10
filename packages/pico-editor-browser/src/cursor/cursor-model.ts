@@ -57,8 +57,18 @@ export class CursorModel {
         this.correctColumnPosition();
     }
 
-    moveToBeginningOfString() {
+    public moveToBeginningOfLine() {
         this.position.column = 0;
+        this.resetCorrectedColumnPosition();
+    }
+
+    public moveToEndOfLine() {
+        const currentLine = this.document.getLine(this.position.line);
+        if (!currentLine) {
+            return;
+        }
+        this.position.column = currentLine.length;
+        this.resetCorrectedColumnPosition();
     }
 
     private resetCorrectedColumnPosition() {

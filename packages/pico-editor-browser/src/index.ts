@@ -9,7 +9,10 @@ import {DocumentController} from "./document/document-controller";
 import {DocumentModel} from "./document/document-model";
 import {DeletePreviousCharacterAction} from "./action/delete-previous-character-action";
 import {CursorController} from "./cursor/cursor-controller";
-import {EnterAction, MoveDownAction, MoveLeftAction, MoveRightAction, MoveUpAction} from "./action/keyboard-actions";
+import {
+    EnterAction, MoveCmdLeftAction, MoveCmdRightAction, MoveDownAction, MoveLeftAction, MoveRightAction,
+    MoveUpAction
+} from "./action/keyboard-actions";
 
 function blockElement() {
     return document.createElement('div');
@@ -61,10 +64,22 @@ document.body.addEventListener('keydown', (e) => {
         dispatcher.dispatch(action);
     }
     if (e.key === 'ArrowLeft') {
+        if (e.metaKey) {
+            e.preventDefault();
+            const action = new MoveCmdLeftAction();
+            dispatcher.dispatch(action);
+            return;
+        }
         const action = new MoveLeftAction();
         dispatcher.dispatch(action);
     }
     if (e.key === 'ArrowRight') {
+        if (e.metaKey) {
+            e.preventDefault();
+            const action = new MoveCmdRightAction();
+            dispatcher.dispatch(action);
+            return;
+        }
         const action = new MoveRightAction();
         dispatcher.dispatch(action);
     }
