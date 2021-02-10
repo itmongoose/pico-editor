@@ -22,8 +22,10 @@ export class CursorModel {
     }
     public moveUp() {
         this.position.line -= 1;
-        if (this.position.line < 0) {
+        if (this.position.line < 0) { // move to the beginning of the line, if this is the first line in the document
             this.position.line = 0;
+            this.position.column = 0;
+            this.resetCorrectedColumnPosition();
         }
         this.correctColumnPosition();
     }
@@ -43,6 +45,14 @@ export class CursorModel {
             this.position.line += 1;
         } else if (forceNewLine && this.position.line === linesCount - 1) {
             this.position.line += 1;
+        } else {    // move to the end of the line, if this is the last line in the document
+            const lastLine = this.document.getLine(this.position.line);
+            if (!lastLine) {
+                return;
+            }
+            this.position.column = lastLine.length;
+            this.resetCorrectedColumnPosition();
+            return;
         }
         this.correctColumnPosition();
     }

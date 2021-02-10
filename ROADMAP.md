@@ -6,7 +6,7 @@
 - [v] move cursor around (single character cursor move with arrows)
 - [v] enter new line correctly on <enter> (do not type \n, but create a new line instead)
 - [v] moving up/down to shorter lines moves cursor to end of string and remembers original column position for a longer line
-- [ ] moving up/down when in the first/last line moves cursor to the beginning/end of string
+- [v] moving up/down when in the first/last line moves cursor to the beginning/end of string
 - [ ] cmd+left/right brings cursor to the beginning/end of line   
 - [ ] tab inserts 4 spaces
 - [ ] backspace works across lines (backspace in the beginning of the line merges previous line with current line)
