@@ -33,5 +33,5 @@
 # Non-functional requirements:
 - [ ] code lint
 - [ ] code organization
-- [ ] unit tests
+- [v] add unit tests runner
 - [ ] e2e / integration tests
