@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "ts-mocha 'src/**/*.test.ts'",
+    "test:coverage": "nyc -e .ts ts-mocha -b 'src/**/*.test.ts'",
     "start": "webpack serve",
     "build": "webpack"
   },
@@ -14,6 +15,7 @@
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^5.0.1",
     "html-webpack-plugin": "^4.5.1",
+    "nyc": "^15.1.0",
     "style-loader": "^2.0.0",
     "ts-loader": "^8.0.14",
     "ts-mocha": "^8.0.0",
