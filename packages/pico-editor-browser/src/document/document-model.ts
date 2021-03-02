@@ -6,23 +6,29 @@ export class DocumentModel {
     public insertText(text: string, startPosition: Position) {
         const linesToInsert = text.split('\n');
 
-        const endChunk = [];
+        // create a line if it doesn't exist
+        if (!this.lines[startPosition.line]) {
+            this.lines[startPosition.line] = '';
+        }
+
+        const endChunk = this.lines[startPosition.line].substring(startPosition.column);
         for (let i = 0; i < linesToInsert.length; i +=1) {
             const currentLine = startPosition.line + i;
             const currentColumn = i === 0 ? startPosition.column : 0;
-            // add new line if needed:
-            if (!this.lines[currentLine]) {
-                this.lines[currentLine] = '';
+
+            // first line: append the inserted line to the end
+            if (i === 0) {
+                this.lines[currentLine] = this.lines[currentLine].substring(0, currentColumn) + linesToInsert[i];
             }
-            const targetLine = this.lines[currentLine];
 
-            const lineChunk = linesToInsert[i];
-            this.lines[currentLine] = targetLine.substring(0, currentColumn) + lineChunk;
-            endChunk.push(targetLine.substring(currentColumn));
+            // following lines: insert them as new lines
+            if (i > 0) {
+                this.lines.splice(currentLine, 0, linesToInsert[i]);
+            }
 
-            // add the rest of the first string to the end:
+            // last line: append the end chunk of the original line to the end
             if (i === linesToInsert.length - 1) {
-                this.lines[currentLine] += endChunk.join('');
+                this.lines[currentLine] += endChunk;
             }
         }
     }
