@@ -51,9 +51,23 @@ export class CursorController implements Controller {
                 this.view.update();
                 break;
             case "Enter":
-                this.dispatcher.dispatch(new InsertTextAction('\n', this.model.getPosition()));
+                let textToInsert = '\n';
+
+                // insert same amount of whitespace as in the beginning of current line:
+                const currentLine = this.model.getCurrentLine();
+                if (currentLine) {
+                    const whitespace = currentLine.match(/^(\s+)/);
+                    if (whitespace) {
+                        textToInsert += whitespace[0];
+                    }
+                }
+
+                this.dispatcher.dispatch(new InsertTextAction(textToInsert, this.model.getPosition()));
                 this.model.moveDown(true);
-                this.model.moveToBeginningOfLine();
+
+                // moving to end of line to position cursor behind possible whitespace
+                this.model.moveToEndOfLine();
+
                 this.view.update();
                 break;
             case "Tab":

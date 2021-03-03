@@ -65,10 +65,15 @@ export class CursorModel {
     public moveToEndOfLine() {
         const currentLine = this.document.getLine(this.position.line);
         if (!currentLine) {
+            this.position.column = 0;
             return;
         }
         this.position.column = currentLine.length;
         this.resetCorrectedColumnPosition();
+    }
+
+    public getCurrentLine(): string | undefined {
+        return this.document.getLine(this.position.line);
     }
 
     private resetCorrectedColumnPosition() {
